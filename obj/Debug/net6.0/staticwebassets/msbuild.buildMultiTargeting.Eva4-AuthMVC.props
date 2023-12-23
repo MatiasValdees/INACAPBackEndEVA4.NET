@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Eva4-AuthMVC.props" />
+</Project>

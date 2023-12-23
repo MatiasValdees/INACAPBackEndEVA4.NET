@@ -1,0 +1,24 @@
+﻿@model UsuarioViewDTO;
+
+<form>
+    <fieldset disabled>
+        <legend>Perfil</legend>
+        <div class="mb-3">
+            <label for="Id" class="form-label">Id</label>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.Id>
+        </div>
+        <div class="mb-3">
+            <label for="Name" class="form-label">Nombre</label>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder=@Model.Name>
+        </div>
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" id="Email" class="form-control" placeholder=@Model.Email>
+        </div>
+        <div class="mb-3">
+            <label for="Rol" class="form-label">Rol</label>
+            <input type="text" id="Rol" class="form-control" placeholder=@Model.Rol>
+        </div>
+    </fieldset>
+    <a asp-controller="Usuario" asp-action="ChangePassword" class="btn btn-primary">Cambiar Contraseña</a>
+</form>

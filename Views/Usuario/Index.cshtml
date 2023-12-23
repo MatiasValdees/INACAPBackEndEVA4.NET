@@ -1,0 +1,107 @@
+﻿@using Eva4_AuthMVC.Models.ViewModel
+@model FindUsuarioViewModel;
+
+
+
+
+
+
+<h1 class="mb-3">Usuarios</h1>
+
+ 
+<form asp-action="Index" method="post">
+    <div class="form-check">
+        <input asp-for="opt" class="form-check-input" type="radio"  id="exampleRadios1" value="1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+            Buscar por Nombre de usuario
+        </label>
+    </div>
+    <div class="form-check">
+        <input asp-for="opt" class="form-check-input" type="radio"  id="exampleRadios2" value="2">
+        <label class="form-check-label" for="exampleRadios2">
+            Buscar por Correo
+        </label>
+    </div>
+    <div class="form-check">
+        <input asp-for="opt" class="form-check-input" type="radio" id="exampleRadios3" value="3">
+        <label class="form-check-label" for="exampleRadios3">
+            Buscar por Rol
+        </label>
+    </div>
+    <input asp-for="value" class="form" />
+    <input type="submit" class="btn btn-primary mt-3 mb-3" value="Buscar" />
+
+</form>
+
+
+<div><a asp-action="Create" class="btn btn-primary mt-3 mb-3">
+    Agregar Usuario
+    </a>
+    
+</div>
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="w-75">
+    <div class="w-75">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col" td style="text-align:center">Eliminar</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Usuarios.Count() > 0)
+                {
+                    foreach (var u in Model.Usuarios)
+                    {
+                        <tr>
+                            <td scope="row">@u.Id</td>
+                            <td>@u.Name</td>
+                            <td>@u.Email</td>
+                            <td>@u.Rol</td>
+                            <td style="text-align:center">@{
+
+                                if (u.isBlocked == true)
+                                {
+                                    <a asp-action="ToggleBlocked" asp-route-Id="@u.Id"><i class="fa-solid fa-toggle-off" style="color:red"></i></a>
+                                }
+                                else
+                                {
+                                    <a asp-action="ToggleBlocked" asp-route-Id="@u.Id"><i class="fa-solid fa-toggle-on" style="color:green"></i></a>
+                                    
+                                }      
+                             }
+                            </td>
+                            
+                            <td style="text-align:center">
+                                <a asp-action="Edit" asp-route-Id="@u.Id"><i class="fa-regular fa-pen-to-square"></i></a>
+                            </td>
+                            <td style="text-align:center">
+                                <a asp-action="Delete" asp-route-Id="@u.Id" onclick="return confirm('Estas Seguro?')"><i class="fa-solid fa-trash"></i></a>
+
+                            </td>
+                        </tr>
+                       
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" style="text-align:center">Usuario no encontrado</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Regresar</a>
+</div>
+
